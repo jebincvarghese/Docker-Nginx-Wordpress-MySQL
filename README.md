@@ -38,7 +38,7 @@ server {
 server {
 
     listen 443 ssl;
-    server_name seblog.tech;
+    server_name jebincvarghese.xyz;
 
     ssl_certificate           /etc/nginx/cert.crt;
     ssl_certificate_key       /etc/nginx/cert.key;
