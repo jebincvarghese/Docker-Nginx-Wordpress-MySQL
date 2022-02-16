@@ -43,8 +43,8 @@ server {
     listen 443 ssl;
     server_name jebincvarghese.xyz;
 
-    ssl_certificate           /etc/nginx/cert.crt;
-    ssl_certificate_key       /etc/nginx/cert.key;
+    ssl_certificate           /etc/nginx/jebincvarghese.xyz.crt;
+    ssl_certificate_key       /etc/nginx/jebincvarghese.xyz.key;
 
 
     ssl_session_cache  builtin:1000  shared:SSL:10m;
@@ -54,7 +54,7 @@ server {
 
     location / {
 	
-	  proxy_pass          http://wordpress;
+      proxy_pass          http://wordpress;
       proxy_set_header        Host $host;
       proxy_set_header        X-Real-IP $remote_addr;
       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -63,6 +63,7 @@ server {
 
     }
   }
+
   
   ```
 b. Obtain SSL certificate for your domain and save private key in cert.key and the certificate in cert.crt
