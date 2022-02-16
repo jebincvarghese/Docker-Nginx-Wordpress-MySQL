@@ -32,7 +32,7 @@ docker container run --name wordpress -d --network mynetwork -e WORDPRESS_DB_HOS
 ```
 server {
     listen 80;
-    return 301 https://seblog.tech;
+    return 301 https://jebincvarghese.xyz;
 }
 
 server {
