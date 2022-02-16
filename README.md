@@ -12,20 +12,23 @@ amazon-linux-extras install docker; systemctl start docker; systemctl enable doc
 ```
 docker network create mynetwork
 ```
-
-## 3. Database container creation
+## 3. Create SSL Certificate files (selfsigned used here)
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout jebincvarghese.xyz.key -out jebincvarghese.xyz.crt
+```
+## 4. Database container creation
 
 ```
 docker container run --name db -d -e MYSQL_ROOT_PASSWORD="mysqlroot@123" -e MYSQL_DATABASE="wpdb" -e MYSQL_USER="wpuser" -e MYSQL_PASSWORD="wp@123" --network mynetwork mysql:5.6
 ```
 
-## 4. Wordpress container creation
+## 5. Wordpress container creation
 
 ```
 docker container run --name wordpress -d --network mynetwork -e WORDPRESS_DB_HOST="db" -e WORDPRESS_DB_USER="wpuser"  -e WORDPRESS_DB_PASSWORD="wp@123" -e WORDPRESS_DB_NAME="wpdb" wordpress
 ```
 
-## 5. Create a custom image for nginx proxy
+## 6. Create a custom image for nginx proxy
 
  a . Create default.conf
 
@@ -82,7 +85,7 @@ docker image build -t nginx:1 .
 ```
 
 
-## 6. Nginx proxy container creation
+## 7. Nginx proxy container creation
 
 ```
 docker container run -d --name proxy --network mynetwork -p 80:80 -p 443:443 nginx:1
